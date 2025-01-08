@@ -10,11 +10,11 @@
     "@angular/common": ">=12.0.0",
     "@angular/core": ">=12.0.0"
   },
-  "homepage": "https://github.com/mehulk05/-mk-phone-input",
+  "homepage": "https://github.com/mehulk05/ng-google-address-autocomplete/tree/main",
 
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mehulk05/-mk-phone-input"
+    "url": "git+https://github.com/mehulk05/ng-google-address-autocomplete/tree/main"
   },
   "author": {
     "name": "mehul kothari",
