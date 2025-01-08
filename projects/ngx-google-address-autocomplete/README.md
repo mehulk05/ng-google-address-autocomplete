@@ -1,63 +1,131 @@
-# NgxGoogleAddressAutocomplete
+# ngx-google-address-autocomplete
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+An Angular package that provides Google Places Autocomplete functionality for input fields, making it easy to implement address autocomplete in your Angular applications.
 
-## Code scaffolding
+## Installation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+`npm install ngx-google-address-autocomplete`
 
-```bash
-ng generate component component-name
+## Setup
+
+### 1\. Add Google Maps JavaScript API
+
+Add the Google Maps JavaScript API script to your `index.html` file:
+
+
+`<script src="https://maps.googleapis.com/maps/api/js?key=<Your API KEY>&libraries=places"></script>`
+
+Replace `<Your API KEY>` with your actual Google Maps API key.
+
+### 2\. Import Module
+
+Import the `NgxGoogleAddressAutocompleteModule` in your app module:
+
+typescript
+
+Copy
+
+``` 
+import { NgxGoogleAddressAutocompleteModule } from "ngx-google-address-autocomplete";
+
+@NgModule({
+  imports: [
+    NgxGoogleAddressAutocompleteModule,
+    BrowserModule,
+    FormsModule,
+    // ... other modules
+  ],
+  // ... other module configurations
+})
+export class AppModule { }
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Usage
 
-```bash
-ng generate --help
+Add the directive to your input field:
+
+```
+<input 
+  ngx-google-address-autocomplete
+  [options]="options"
+  #placesRef="ngx-places"
+  (onAddressChange)="handleAddressChange($event)"
+/>
 ```
 
-## Building
+### Options
 
-To build the library, run:
+You can customize the behavior of the autocomplete by passing options:
 
-```bash
-ng build ngx-google-address-autocomplete
+## Country Restriction
+
+To restrict address suggestions to a specific country:
+
+```
+<input 
+  ngx-google-address-autocomplete
+  [options]="{
+    types: [],
+    componentRestrictions: { country: 'UA' }
+  }"
+  #placesRef="ngx-places"
+  (onAddressChange)="handleAddressChange($event)"
+/>
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+## API Reference
 
-### Publishing the Library
+### Directive
 
-Once the project is built, you can publish your library by following these steps:
+*   `ngx-google-address-autocomplete`: Main directive to enable address autocomplete
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-google-address-autocomplete
-   ```
+### Inputs
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+*   `[options]`: Configuration object for Google Places Autocomplete
+    *   `types`: Array of place types
+    *   `componentRestrictions`: Object to restrict results to specific countries
 
-## Running unit tests
+### Outputs
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+*   `(onAddressChange)`: Event emitted when an address is selected, returns the Google Place result
 
-```bash
-ng test
+### Template Reference
+
+*   `#placesRef="ngx-places"`: Reference to access the directive instance
+
+## Example
+
+
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <input 
+      ngx-google-address-autocomplete
+      [options]="options"
+      #placesRef="ngx-places"
+      (onAddressChange)="handleAddressChange($event)"
+    />
+  `
+})
+export class AppComponent {
+  options = {
+    types: [],
+    componentRestrictions: { country: 'UA' }
+  };
+
+  handleAddressChange(address: any) {
+    console.log(address);
+  }
+}
 ```
 
-## Running end-to-end tests
+## License
 
-For end-to-end (e2e) testing, run:
+MIT
 
-```bash
-ng e2e
-```
+## Contributing
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Feel free to submit issues and enhancement requests!
